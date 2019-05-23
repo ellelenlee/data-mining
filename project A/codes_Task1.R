@@ -1,4 +1,4 @@
-1. Pre-processing data 
+## 1. Pre-processing data 
 
 # Import data and have an overview of database. 
 # loading packages and import database 
@@ -38,7 +38,7 @@ data.train<-scale(vehicle2[,2:19])
 summary(data.train) 
 
 
-2. Find ideal number of clusters 
+## 2. Find ideal number of clusters 
 
 # NbCluster Method 
 #find clustering group number 
@@ -61,7 +61,8 @@ wss<-sapply(k, function(k){kmeans(data.train,centers = k)$tot.withinss})
 plot(k,wss,type = "b", xlab="Number of Clusters", ylab="Within groups sum of squares") 
  
  
-3. Fit the K-means models with the best clusters 
+##3. Fit the K-means models with the best clusters 
+
 # clustering with different numbers of groups 
 # Fit the K-means models with the best clusters 
 # 2 groups 
@@ -86,7 +87,8 @@ plotcluster(data.train, fit.km4$cluster)
  
  
  
-4. Evaluation the K-means models and Improve 
+## 4. Evaluation the K-means models and Improve 
+
 # Two Clusters 
 parcoord(data.train, fit.km1$cluster) 
 confuseTable.km1 <- table(vehicle2$Class, fit.km1$cluster) 
