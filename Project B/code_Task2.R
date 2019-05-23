@@ -1,4 +1,4 @@
-1. Input configuration
+##1. Input configuration
 
 #loading packages and import database
 library(e1071)
@@ -21,7 +21,7 @@ exchange_test_original_day5 <- exchange_table[397:496,"day5"]
 
 
 
-2. SVR with various structures and parameters
+##2. SVR with various structures and parameters
 
 #SVR with various structures and parameters
 svm_tune <- tune(svm,day5~ .,data= ExchangeTrain0,kernel="radial", ranges=list(cost=10^(-3:2),gamma=10^(-3:-1)))
@@ -45,7 +45,7 @@ summary(svm_tune)
 
 
 
-3. Results with graphs and performance indices
+##3. Results with graphs and performance indices
 
 #after tune -- apply the best resultes and evaluate
 svm_model_after_tune <- svm(day5 ~ ., data=ExchangeTrain0, kernel="radial", cost=100,gamma=0.001)
