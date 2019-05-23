@@ -8,7 +8,7 @@ library(neuralnet)
 library(grid)
 library(MASS)
 library(data.table)
-exchangeGBP<-read.csv("/exchangeGBP.csv")
+exchangeGBP<-read.csv("exchangeGBP.csv")
 str(exchangeGBP)
 
 #input selection
@@ -24,6 +24,18 @@ exchange_table
 
 ##2. Neural Network Model and Evaluation methods
 ##2.1 Normalize data & set training and testing data group
+
+#normalization data & set taining and testing data group
+melted_exchange_table = melt(exchange_table)
+tail(melted_exchange_table)
+qplot(x=value, data=melted_exchange_table) + facet_wrap(~variable, scales='free')
+normalize <- function(x) {
+return((x - min(x)) / (max(x) - min(x)))
+}
+Exchange_table_norm <- as.data.frame(lapply(exchange_table, normalize))
+summary(Exchange_table_norm)
+ExchangeTrain<-Exchange_table_norm[1:396,]
+ExchangeTest<-Exchange_table_norm[397:496,]
 
 ##2.2 Training a Model using the neuralnet function
 
