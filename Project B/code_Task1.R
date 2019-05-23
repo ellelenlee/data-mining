@@ -1,4 +1,4 @@
-1. Various input configurations
+##1. Various input configurations
 
 #loading packages and import database
 library(ggplot2)
@@ -21,10 +21,11 @@ setnames(exchange_table,1:5,c("day1","day2","day3","day4","day5"))
 exchange_table
 
 
-2. Neural Network Model and Evaluation methods
-2.1 Normalize data & set training and testing data group
 
-2.2 Training a Model using the neuralnet function
+##2. Neural Network Model and Evaluation methods
+##2.1 Normalize data & set training and testing data group
+
+##2.2 Training a Model using the neuralnet function
 
 #Training a Model using the neuralnet function
 set.seed(12345)
@@ -34,8 +35,8 @@ model_results <- compute(exchange_model, ExchangeTest[1:4])
 predicted_exchange <- model_results$net.result
 cor(predicted_exchange, ExchangeTest$day5)
 
-2.3 Evaluating Model Performance
-2.3.1 Unnormalized data
+##2.3 Evaluating Model Performance
+##2.3.1 Unnormalized data
 
 #Evaluating Model Performance (unnormalize the data)
 head(predicted_exchange)
@@ -50,7 +51,7 @@ return( (max - min)*x + min )
 day5_pred <- unnormalize(predicted_exchange, day5_min, day5_max)
 day5_pred
 
-2.3.2 RMSE, MAPE and Visual plot
+##2.3.2 RMSE, MAPE and Visual plot
 
 #RMSE
 rmse <- function(x)
@@ -80,7 +81,7 @@ final_result
 
 
 
-3. MLPs and performances comparison
+##3. MLPs and performances comparison
 
 #Improving Model Performance
 set.seed(12345)
@@ -91,6 +92,7 @@ model_results2 <- compute(exchange_model2, ExchangeTest[1:4])
 predicted_exchange2 <- model_results2$net.result
 cor(predicted_exchange2, ExchangeTest$day5)
 day5_pred2 <- unnormalize(predicted_exchange2, day5_min, day5_max)
+
 error2 <- (exchange_test_original_day5 - day5_pred2 )
 pred_RMSE2 <- rmse(error2)
 pred_RMSE2
@@ -103,22 +105,26 @@ melted_exchange_table2 = melt(exchange_table2)
 Exchange_table_norm2 <- as.data.frame(lapply(exchange_table2, normalize))
 ExchangeTrain2<-Exchange_table_norm2[1:397,]
 ExchangeTest2<-Exchange_table_norm2[398:497,]
+
 set.seed(12345)
 exchange_model_1 <- neuralnet(day4 ~ day1 + day2 + day3, data = ExchangeTrain2)
 plot(exchange_model_1)
 model_results_1 <- compute(exchange_model_1, ExchangeTest2[1:3])
 predicted_exchange_1 <- model_results_1$net.result
 cor(predicted_exchange_1, ExchangeTest2$day4)
+
 exchange_train_original_day4 <- exchange_table2[1:397,"day4"]
 exchange_test_original_day4 <- exchange_table2[398:497,"day4"]
 day4_min <- min(exchange_train_original_day4)
 day4_max <- max(exchange_train_original_day4)
 day4_pred_1 <- unnormalize(predicted_exchange_1, day4_min, day4_max)
+
 error_1 <- (exchange_test_original_day4 - day4_pred_1 )
 pred_RMSE_1 <- rmse(error_1)
 pred_RMSE_1
 pred_MAPE_1<-mape(exchange_test_original_day4,day4_pred_1)
 pred_MAPE_1
+
 set.seed(12345)
 exchange_model_2 <- neuralnet(day4 ~ day1 + day2 + day3, data = ExchangeTrain2, hidden = 3,act.fct='logistic')
 plot(exchange_model_2)
@@ -126,6 +132,7 @@ model_results_2 <- compute(exchange_model_2, ExchangeTest2[1:3])
 predicted_exchange_2 <- model_results_2$net.result
 cor(predicted_exchange_2, ExchangeTest2$day4)
 day4_pred_2 <- unnormalize(predicted_exchange_2, day4_min, day4_max)
+
 error_2 <- (exchange_test_original_day4 - day4_pred_2 )
 pred_RMSE_2 <- rmse(error_2)
 pred_RMSE_2
