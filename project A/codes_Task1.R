@@ -9,7 +9,7 @@ library(gridExtra)
 library(fpc) 
 library(MASS) 
 
-vehicle<-read.csv("E:/PG/1-2 7BUIS008W Data Mining and Machine Learning/cw q/vehicle.csv") 
+vehicle<-read.csv("vehicle.csv") 
 
 # Summary overview of `vehicle` database 
 head(vehicle) 
