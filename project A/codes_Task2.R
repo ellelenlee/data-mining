@@ -24,7 +24,7 @@ exchange_table
 2. Neural Network Model and Evaluation methods
 2.1 Normalize data & set training and testing data group
 
-2.2Training a Model using the neuralnet function
+2.2 Training a Model using the neuralnet function
 
 #Training a Model using the neuralnet function
 set.seed(12345)
